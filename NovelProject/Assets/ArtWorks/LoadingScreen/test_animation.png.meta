@@ -1,0 +1,386 @@
+fileFormatVersion: 2
+guid: b1b7bb9502b547542a7d28196787d98f
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_0
+    21300002: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_1
+    21300004: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_2
+    21300006: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_3
+    21300008: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_4
+    21300010: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_5
+    21300012: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_6
+    21300014: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_7
+    21300016: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_8
+    21300018: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_9
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 1
+  spritePivot: {x: 0, y: 1}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: 0
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 163.5
+        width: 120
+        height: 163.5
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e2bc70e4249e4345b558010cdc91155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_1
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 163.5
+        width: 120
+        height: 163.5
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8992c8b347835aa468a2d41b0070ea8e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_2
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 163.5
+        width: 120
+        height: 163.5
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 225e27e2ff004b74c8d6f1e518545774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_3
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 163.5
+        width: 120
+        height: 163.5
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 258734324bf30514580b3f05dca621a6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_4
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 163.5
+        width: 120
+        height: 163.5
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd218d9ea5c488b41a184d3054a66f43
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0.5
+        width: 120
+        height: 163.5
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 548ce0d25523c3747a344033e631926f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_6
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0.5
+        width: 120
+        height: 163.5
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd25a24c7d9438a429fc9429e0fb9149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_7
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0.5
+        width: 120
+        height: 163.5
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b54cb6f7aecf1944920385396cfa7ef
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_8
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 0.5
+        width: 120
+        height: 163.5
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 275f6d7422f520244ab2749de0a6b004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animation_panda_sequence_by_xwill_o_wisp-d5ex3jb_9
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0.5
+        width: 120
+        height: 163.5
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81b4e61d3baced043a5fdf8b097f6d8a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline:
+    - - {x: -291, y: -163.5}
+      - {x: -206, y: -163.5}
+      - {x: -194, y: -157.5}
+      - {x: -194, y: -67.5}
+      - {x: -206, y: -11.5}
+      - {x: -211, y: -10.5}
+      - {x: -288, y: -10.5}
+      - {x: -291, y: -13.5}
+    - - {x: -183, y: 60.5}
+      - {x: -163, y: 14.5}
+      - {x: -142, y: 8.5}
+      - {x: -125, y: 5.5}
+      - {x: -120, y: 5.5}
+      - {x: -115, y: 7.5}
+      - {x: -130, y: -7.5}
+      - {x: -148, y: -45.5}
+      - {x: -173, y: -127.5}
+      - {x: -173, y: -135.5}
+      - {x: -156, y: -163.5}
+      - {x: 183, y: -163.5}
+      - {x: 183, y: 150.5}
+      - {x: -175, y: 150.5}
+      - {x: -183, y: 148.5}
+    - - {x: 286, y: 1.5}
+      - {x: 201, y: 1.5}
+      - {x: 188, y: -48.5}
+      - {x: 188, y: -150.5}
+      - {x: 201, y: -159.5}
+      - {x: 219, y: -163.5}
+      - {x: 273, y: -163.5}
+      - {x: 300, y: -147.5}
+      - {x: 300, y: -124.5}
+      - {x: 292, y: -122.5}
+    - - {x: -55, y: -147.5}
+      - {x: -55, y: -146.5}
+      - {x: -55, y: -149.5}
+      - {x: -56, y: -149.5}
+    - - {x: -64, y: -142.5}
+      - {x: -65, y: -142.5}
+      - {x: -67, y: -144.5}
+      - {x: -66, y: -144.5}
+    - - {x: -45, y: -143.5}
+      - {x: -47, y: -141.5}
+      - {x: -44, y: -142.5}
+      - {x: -43, y: -144.5}
+    - - {x: -74, y: -1.5}
+      - {x: -72, y: -3.5}
+      - {x: -69, y: -3.5}
+      - {x: -73, y: -3.5}
+    - - {x: -297, y: 105.5}
+      - {x: -300, y: 100.5}
+      - {x: -300, y: 43.5}
+      - {x: -291, y: 5.5}
+      - {x: -194, y: 5.5}
+      - {x: -177, y: 7.5}
+      - {x: -177, y: 88.5}
+      - {x: -181, y: 105.5}
+    - - {x: 214, y: 158.5}
+      - {x: 210, y: 157.5}
+      - {x: 179, y: 121.5}
+      - {x: 179, y: 101.5}
+      - {x: 213, y: 5.5}
+      - {x: 254, y: 5.5}
+      - {x: 300, y: 14.5}
+      - {x: 300, y: 71.5}
+      - {x: 251, y: 158.5}
+    physicsShape: []
+    bones: []
+    spriteID: 76eb63ff61799f74da4f0c714ce22d0c
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
