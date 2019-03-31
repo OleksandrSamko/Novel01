@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
             Instance = this;
         if (Instance != this)
             Destroy(this.gameObject);
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 
 
@@ -62,4 +62,10 @@ public class MainMenu : MonoBehaviour
         loginPanel.gameObject.SetActive(false);
         userPanel.gameObject.SetActive(true);
     }
+
+    public void StartGame()
+    {
+        SceneLoader.Instance.LoadingSceneAsync("GameScene");
+    }
+
 }
