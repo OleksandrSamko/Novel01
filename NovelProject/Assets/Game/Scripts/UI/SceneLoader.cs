@@ -52,7 +52,10 @@ public class SceneLoader : MonoBehaviour {
 
     public void ScenePreloadDisable()
     {
-        Destroy(loadingPanel);
+        if (loadingPanel != null)
+        {
+            Destroy(loadingPanel);
+        }
     }
 
     //fullscreen loading background

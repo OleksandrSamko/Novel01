@@ -12,14 +12,16 @@ public class NetworkDataManager : MonoBehaviour
     public static NetworkDataManager Instance;
     public static string basePath;
 
-    private static string userPath;
+    private static string userCreatePath;
+    private static string userGetPath;
     private static string progressPath;
 
     private void Awake()
     {
         Instance = this;
-        basePath = "";
-        userPath = basePath+"/player/create";
+        basePath = "http://localhost/novel";
+        userCreatePath = basePath + "/user/create.php";
+        userGetPath = basePath + "/user/get.php";
         progressPath = basePath + "";
     }
 
@@ -57,16 +59,17 @@ public class NetworkDataManager : MonoBehaviour
             },
             EnableDebug = true,
         };
-        if (defRequest.Body != null) {
-            Debug.Log("body: "+defRequest.Body.ToString());        }
-        //Debug.Log("Content : "+RestClient.DefaultRequestHeaders["Content-Type"]);
+        if (defRequest.Body != null)
+        {
+            Debug.Log("body: " + defRequest.Body.ToString());
+        }
         return defRequest;
     }
 
     static RequestHelper GetUIDRequest<T>(T data, string path)
     {
         //default request
-        RestClient.DefaultRequestHeaders["Content-Type"] = "application/json";  
+        RestClient.DefaultRequestHeaders["Content-Type"] = "application/json";
         RestClient.DefaultRequestHeaders["Authorization"] = DataManager.userData.id;
 
         var defRequest = new RequestHelper
@@ -90,19 +93,14 @@ public class NetworkDataManager : MonoBehaviour
         return defRequest;
     }
 
-    public void UploadUserData( UserData data)
+    public void UploadUserData(UserData data)
     {
-        var postRequest = GetBasicRequest<UserData>(data, userPath);
+        var postRequest = GetBasicRequest<UserData>(data, userCreatePath);
 
-        RestClient.Post<UserData>(postRequest)
+        RestClient.Post(postRequest)
         .Then(res =>
         {
-            Debug.Log("Succesful upload: " + res);
-            DataManager.userData.id = res.id;
-
-            DataManager.Instance.UserRegistered = true;
-            //DownloadProgress();
-            DataManager.Instance.StartGameProcess();
+            OnLoginSuccess(res);
         })
         .Catch(
             err =>
@@ -110,11 +108,60 @@ public class NetworkDataManager : MonoBehaviour
                 //no userID, no registered 
                 Debug.LogWarning("Internet Error: " + err.Message);
                 Message.Instance.ShowMessage("Internet Error: " + err.Message);
+                DataManager.Instance.StartLogin();
                 //DataManager.Instance.UserRegistered = false;
                 //DataManager.Instance.LoadLocalProgress();
-                DataManager.Instance.StartGameProcess();
             }
         );
+    }
+
+    public void GetUserDataID(UserData data)
+    {
+        var getRequest = GetBasicRequest<UserData>(data, userGetPath);
+
+        RestClient.Post(getRequest)
+        .Then(res =>
+        {
+            OnLoginSuccess(res);
+        })
+        .Catch(
+            err =>
+            {
+                //no userID, no registered 
+                Debug.LogWarning("Internet Error: " + err.Message);
+                Message.Instance.ShowMessage("Internet Error: " + err.Message);
+                DataManager.Instance.StartLogin();
+                //DataManager.Instance.UserRegistered = false;
+                //DataManager.Instance.LoadLocalProgress();
+            }
+        );
+    }
+
+    private void OnLoginSuccess(ResponseHelper res)
+    {
+        Debug.Log("Succesful upload: " + res.Text);
+        UserResponse userResponse;
+        try
+        {
+            userResponse = JsonUtility.FromJson<UserResponse>(res.Text);
+            if (userResponse.id == null || userResponse.id.Length < 1)
+            {
+                throw new ArgumentNullException(userResponse.id, "id is invalid");
+            }
+        }
+        catch (Exception err)
+        {
+            Debug.LogWarning("Error: " + err.Message);
+            Message.Instance.ShowMessage("Error: " + err.Message);
+            DataManager.Instance.StartLogin();
+            return;
+        }
+        //ok
+        DataManager.userData.id = userResponse.id;
+        Debug.Log("id=" + DataManager.userData.id);
+        DataManager.Instance.UserRegistered = true;
+        //DownloadProgress();
+        DataManager.Instance.StartGameProcess();
     }
 
     public void UploadProgress(Progress progress)
@@ -154,5 +201,5 @@ public class NetworkDataManager : MonoBehaviour
             }
         );
     }
-    
+
 }

@@ -37,9 +37,14 @@ public class DataManager : MonoBehaviour
     {
     }
 
+    public void StartLogin()
+    {
+        MainMenu.Instance.ShowLoginPanel();
+    }
+
     public void StartGameProcess()
     {
-        SceneLoader.Instance.ScenePreloadDisable();
+        MainMenu.Instance.ShowGamePanel();
     }
 
     private void AddStat(UInt32 score, ref uint average, ref uint max, ref uint total, uint divider)
@@ -57,9 +62,14 @@ public class DataManager : MonoBehaviour
     {
     }
 
-    public void Login()
+    public void CreateUser()
     {
         NetworkDataManager.Instance.UploadUserData(userData);
+    }
+
+    public void GetUser()
+    {
+        NetworkDataManager.Instance.GetUserDataID(userData);
     }
 
     public void SaveLocalProgress()
