@@ -7,7 +7,7 @@ using NetworkSync;
 public class MainMenu : MonoBehaviour
 {
     public static MainMenu Instance;
-
+    public Transform gamePanel;
     public Transform loginPanel;
     public Transform userPanel;
     public Text loginText;
@@ -26,6 +26,11 @@ public class MainMenu : MonoBehaviour
         //DontDestroyOnLoad(this.gameObject);
     }
 
+    private void Start() {
+        loginPanel.gameObject.SetActive(true);
+        userPanel.gameObject.SetActive(false);
+        gamePanel.gameObject.SetActive(false);
+    }
 
     public void OnCreateUser()
     {
@@ -61,6 +66,7 @@ public class MainMenu : MonoBehaviour
         SceneLoader.Instance.ScenePreloadDisable();
         loginPanel.gameObject.SetActive(false);
         userPanel.gameObject.SetActive(true);
+        gamePanel.gameObject.SetActive(true);
     }
 
     public void StartGame()
