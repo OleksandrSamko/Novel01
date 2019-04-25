@@ -2,27 +2,16 @@
 using Proyecto26;
 using RSG;
 using System;
-using UnityEngine.SocialPlatforms;
-using System.Collections.Generic;
-using System.Collections;
+using Fungus;
 using NetworkSync;
 
 public class NetworkDataManager : MonoBehaviour
 {
     public static NetworkDataManager Instance;
-    public static string basePath;
-
-    private static string userCreatePath;
-    private static string userGetPath;
-    private static string progressPath;
 
     private void Awake()
     {
         Instance = this;
-        basePath = "http://localhost/novel";
-        userCreatePath = basePath + "/user/create.php";
-        userGetPath = basePath + "/user/get.php";
-        progressPath = basePath + "";
     }
 
     static void UploadData<T>(T data, string uploadpath)
@@ -70,6 +59,7 @@ public class NetworkDataManager : MonoBehaviour
     {
         //default request
         RestClient.DefaultRequestHeaders["Content-Type"] = "application/json";
+        //RestClient.DefaultRequestHeaders["Authorization"] = "15";
         RestClient.DefaultRequestHeaders["Authorization"] = DataManager.userData.id;
 
         var defRequest = new RequestHelper
@@ -95,7 +85,7 @@ public class NetworkDataManager : MonoBehaviour
 
     public void UploadUserData(UserData data)
     {
-        var postRequest = GetBasicRequest<UserData>(data, userCreatePath);
+        var postRequest = GetBasicRequest<UserData>(data, Config.userCreatePath);
 
         RestClient.Post(postRequest)
         .Then(res =>
@@ -117,7 +107,7 @@ public class NetworkDataManager : MonoBehaviour
 
     public void GetUserDataID(UserData data)
     {
-        var getRequest = GetBasicRequest<UserData>(data, userGetPath);
+        var getRequest = GetBasicRequest<UserData>(data, Config.userGetPath);
 
         RestClient.Post(getRequest)
         .Then(res =>
@@ -144,7 +134,7 @@ public class NetworkDataManager : MonoBehaviour
         try
         {
             userResponse = JsonUtility.FromJson<UserResponse>(res.Text);
-            if (userResponse.id == null || userResponse.id.Length < 1)
+            if (string.IsNullOrEmpty(userResponse.id))
             {
                 throw new ArgumentNullException(userResponse.id, "id is invalid");
             }
@@ -159,16 +149,16 @@ public class NetworkDataManager : MonoBehaviour
         //ok
         DataManager.userData.id = userResponse.id;
         Debug.Log("id=" + DataManager.userData.id);
-        DataManager.Instance.UserRegistered = true;
+        DataManager.Instance.UserLogged = true;
+        Config.saveDataKey = DataManager.userData.login;
         //DownloadProgress();
         DataManager.Instance.StartGameProcess();
     }
 
     public void UploadProgress(Progress progress)
     {
-        var postRequest = GetUIDRequest<Progress>(progress, progressPath);
-
-        RestClient.Post<Progress>(postRequest)
+        var postRequest = GetUIDRequest<Progress>(progress, Config.progressSetPath);
+        RestClient.Post(postRequest)
         .Then(res =>
         {
             Debug.Log("Succesful upload answer: " + res);
@@ -176,6 +166,7 @@ public class NetworkDataManager : MonoBehaviour
         .Catch(
             err =>
             {
+                Message.Instance.ShowMessage("Internet Error: " + err.Message);
                 Debug.LogWarning("Internet Error: " + err.Message);
             }
         );
@@ -183,21 +174,30 @@ public class NetworkDataManager : MonoBehaviour
 
     public void DownloadProgress()
     {
-        var getRequest = GetUIDRequest<Progress>(null, progressPath);
+        var getRequest = GetUIDRequest<Progress>(null, Config.progressGetPath);
 
         RestClient.Get(getRequest).Then(response =>
         {
             //got stats from server, save stats to device
             Debug.Log("response.Text " + response.Text);
-            DataManager.progress = JsonUtility.FromJson<Progress>(response.Text);
-            DataManager.Instance.SaveLocalProgress();
+            var saveHistory = JsonUtility.FromJson<SaveHistory>(response.Text);
+            if (saveHistory != null)
+            {
+                SaveManager.SaveHistory = saveHistory;
+                Fungus.FungusManager.Instance.SaveManager.Save(Config.saveDataKey);
+            }
+            else
+            {
+                Message.Instance.ShowMessage("No save");
+            }
+
+            Debug.Log("SaveManager.SaveHistory : " + SaveManager.SaveHistory);
         })
         .Catch(
             err =>
             {
-                //load local stats 
+                Message.Instance.ShowMessage("Internet Error: " + err.Message);
                 Debug.LogWarning("Internet Error: " + err.Message);
-                DataManager.Instance.LoadLocalProgress();
             }
         );
     }

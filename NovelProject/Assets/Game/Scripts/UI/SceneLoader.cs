@@ -62,10 +62,6 @@ public class SceneLoader : MonoBehaviour {
     void SetPositionLoadingPanel()
     {
         RectTransform rt = loadingPanel.GetComponent<RectTransform>();
-        float left = rt.offsetMin.x;
-        float right = -rt.offsetMax.x;
-        float top = -rt.offsetMax.y;
-        float bottom = rt.offsetMin.y;
     }
 
     void ConfigureLoadingPanel()

@@ -5,19 +5,49 @@
 
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using System.IO;
 
 namespace Fungus
 {
     /// <summary>
     /// Manages the Save History (a list of Save Points) and provides a set of operations for saving and loading games.
     /// </summary>
-    public class SaveManager : MonoBehaviour 
+    public class SaveManager : MonoBehaviour
     {
         protected static SaveHistory saveHistory = new SaveHistory();
 
+        public static SaveHistory SaveHistory
+        {
+            get
+            {
+                return saveHistory;
+            }
+            set
+            {
+                saveHistory = value;
+            }
+        }
+
+        public static string STORAGE_DIRECTORY { get { return Application.persistentDataPath + "/FungusSaves/"; } }
+
+        private static string GetFullFilePath(string saveDataKey)
+        {
+            return STORAGE_DIRECTORY + saveDataKey + ".json";
+        }
+
         protected virtual bool ReadSaveHistory(string saveDataKey)
         {
-            var historyData = PlayerPrefs.GetString(saveDataKey);
+            var historyData = string.Empty;
+#if UNITY_WEBPLAYER || UNITY_WEBGL
+            historyData = PlayerPrefs.GetString(saveDataKey);
+#else
+            var fullFilePath = GetFullFilePath(saveDataKey);
+            Debug.Log("ReadPath: " + fullFilePath);
+            if (System.IO.File.Exists(fullFilePath))
+            {
+                historyData = System.IO.File.ReadAllText(fullFilePath);
+            }
+#endif//UNITY_WEBPLAYER
             if (!string.IsNullOrEmpty(historyData))
             {
                 var tempSaveHistory = JsonUtility.FromJson<SaveHistory>(historyData);
@@ -30,14 +60,24 @@ namespace Fungus
 
             return false;
         }
-
         protected virtual bool WriteSaveHistory(string saveDataKey)
         {
-            var historyData = JsonUtility.ToJson(saveHistory, true);
+            var historyData = JsonUtility.ToJson(saveHistory);
             if (!string.IsNullOrEmpty(historyData))
             {
+#if UNITY_WEBPLAYER || UNITY_WEBGL
                 PlayerPrefs.SetString(saveDataKey, historyData);
                 PlayerPrefs.Save();
+#else
+                var fileLoc = GetFullFilePath(saveDataKey);
+                Debug.Log("SaveTo: "+fileLoc);
+                Debug.Log("data: " + historyData);
+                //make sure the dir exists
+                System.IO.FileInfo file = new System.IO.FileInfo(fileLoc);
+                file.Directory.Create();
+
+                System.IO.File.WriteAllText(fileLoc, historyData);
+#endif//UNITY_WEBPLAYER
                 return true;
             }
 
@@ -207,8 +247,16 @@ namespace Fungus
         /// </summary>
         public void Delete(string saveDataKey)
         {
+#if UNITY_WEBPLAYER || UNITY_WEBGL
             PlayerPrefs.DeleteKey(saveDataKey);
             PlayerPrefs.Save();
+#else
+            var fullFilePath = GetFullFilePath(saveDataKey);
+            if (System.IO.File.Exists(fullFilePath))
+            {
+                System.IO.File.Delete(fullFilePath);
+            }
+#endif//UNITY_WEBPLAYER
         }
 
         /// <summary>
@@ -216,7 +264,12 @@ namespace Fungus
         /// </summary>
         public bool SaveDataExists(string saveDataKey)
         {
+#if UNITY_WEBPLAYER || UNITY_WEBGL
             return PlayerPrefs.HasKey(saveDataKey);
+#else
+            var fullFilePath = GetFullFilePath(saveDataKey);
+            return System.IO.File.Exists(fullFilePath);
+#endif//UNITY_WEBPLAYER
         }
 
         /// <summary>
