@@ -19,12 +19,12 @@ require_once('../DB.php');
 require_once('id_access.php');
 
 //create user
-$sql = "INSERT INTO users (id, login, password)
+$sql = "INSERT INTO `users` (id, login, password)
 VALUES (NULL,'".$user_data->login."', '".$user_data->password."')";
 
 if ($conn->query($sql) !== TRUE)
 {
-	throw new Exception("false\n" . $sql . "<br>" . $conn->error);
+	throw new Exception("false\n" . $sql . '\n' . $conn->error);
 }
 
 //return id, make json answer
@@ -38,8 +38,8 @@ if ($result->num_rows <= 0) {
 $row = $result->fetch_assoc();
 
  //create progress
-$sql = "INSERT INTO progress (id, id_user, save)
-VALUES (NULL,'".$row["id"]."', NULL)";
+$sql = "INSERT INTO progress (id, id_user, save_data)
+VALUES (NULL,".$row["id"].", NULL)";
 
 if ($conn->query($sql) !== TRUE)
 {
