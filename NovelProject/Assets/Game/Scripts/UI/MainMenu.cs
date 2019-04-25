@@ -7,14 +7,11 @@ using NetworkSync;
 public class MainMenu : MonoBehaviour
 {
     public static MainMenu Instance;
-<<<<<<< HEAD
 
     public string gameSceneName;
 
     public Transform menuPanel;
-=======
     public Transform gamePanel;
->>>>>>> master
     public Transform loginPanel;
     public Transform userPanel;
     public Text loginText;
@@ -74,11 +71,8 @@ public class MainMenu : MonoBehaviour
         SceneLoader.Instance.ScenePreloadDisable();
         loginPanel.gameObject.SetActive(false);
         userPanel.gameObject.SetActive(true);
-<<<<<<< HEAD
         menuPanel.gameObject.SetActive(true);
-=======
         gamePanel.gameObject.SetActive(true);
->>>>>>> master
     }
 
     public void StartGame()
