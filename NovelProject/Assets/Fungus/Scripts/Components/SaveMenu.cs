@@ -12,7 +12,7 @@ namespace Fungus
     /// <summary>
     /// A singleton game object which displays a simple UI for the save system.
     /// </summary>
-    public class SaveMenu : MonoBehaviour 
+    public class SaveMenu : MonoBehaviour
     {
         [Tooltip("The string key used to store save game data in Player Prefs. If you have multiple games defined in the same Unity project, use a unique key for each one.")]
         [SerializeField] protected string saveDataKey = FungusConstants.DefaultSaveDataKey;
@@ -70,8 +70,13 @@ namespace Fungus
             instance = this;
 
             GameObject.DontDestroyOnLoad(this);
-
+            SetConfig();
             clickAudioSource = GetComponent<AudioSource>();
+        }
+
+        private void SetConfig()
+        {
+            saveDataKey = Config.saveDataKey;
         }
 
         protected virtual void Start()
@@ -110,7 +115,7 @@ namespace Fungus
                 saveButton.gameObject.SetActive(showSaveAndLoad);
                 loadButton.gameObject.SetActive(showSaveAndLoad);
             }
- 
+
             if (showSaveAndLoad)
             {
                 if (saveButton != null)
@@ -199,18 +204,22 @@ namespace Fungus
             if (saveMenuActive)
             {
                 // Switch menu off
-                LeanTween.value(saveMenuGroup.gameObject, saveMenuGroup.alpha, 0f, 0.5f).setOnUpdate( (t) => { 
+                LeanTween.value(saveMenuGroup.gameObject, saveMenuGroup.alpha, 0f, 0.5f).setOnUpdate((t) =>
+                {
                     saveMenuGroup.alpha = t;
-                }).setOnComplete( () => {
+                }).setOnComplete(() =>
+                {
                     saveMenuGroup.alpha = 0f;
                 });
             }
             else
             {
                 // Switch menu on
-                LeanTween.value(saveMenuGroup.gameObject, saveMenuGroup.alpha, 1f, 0.5f).setOnUpdate( (t) => { 
+                LeanTween.value(saveMenuGroup.gameObject, saveMenuGroup.alpha, 1f, 0.5f).setOnUpdate((t) =>
+                {
                     saveMenuGroup.alpha = t;
-                }).setOnComplete( () => {
+                }).setOnComplete(() =>
+                {
                     saveMenuGroup.alpha = 1f;
                 });
             }
@@ -229,6 +238,17 @@ namespace Fungus
             {
                 PlayClickSound();
                 saveManager.Save(saveDataKey);
+            }
+        }
+
+        public virtual void SaveToServer()
+        {
+            var saveManager = FungusManager.Instance.SaveManager;
+
+            if (saveManager.NumSavePoints > 0)
+            {
+                PlayClickSound();
+                DataManager.Instance.WriteProgressToServer();
             }
         }
 

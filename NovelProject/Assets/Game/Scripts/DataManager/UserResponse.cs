@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UserResponse {
-    public string id;
-
-    public override string ToString()
+namespace NetworkSync
+{
+    public class UserResponse : NetworkModel
     {
-        return UnityEngine.JsonUtility.ToJson(this, true);
+        public string id;
+
     }
 }

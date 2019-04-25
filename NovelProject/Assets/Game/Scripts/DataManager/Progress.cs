@@ -1,8 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fungus;
 
-public class Progress {
-
-    int progress;
+namespace NetworkSync
+{
+    public class Progress : NetworkModel
+    {
+        public string data;
+    }
 }

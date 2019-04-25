@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using UnityEngine.SocialPlatforms;
 using UnityEngine;
 using System;
+using Fungus;
 using NetworkSync;
 
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
     public static UserData userData;   
-    public static Progress progress;   
+    public static Progress progress = new Progress();   
 
-    public bool UserRegistered
+    public bool UserLogged
     {
-        get { return (userRegistered == 1); }
+        get { return (userLogged == 1); }
         set
         {
-            userRegistered = value ? 1 : 0;
-            SaveRegistered();
+            userLogged = value ? 1 : 0;
+            //SaveRegistered();
         }
     }
 
-    private int userRegistered = 0;
+    private int userLogged = 0;
 
     private void Awake()
     {
@@ -72,28 +73,34 @@ public class DataManager : MonoBehaviour
         NetworkDataManager.Instance.GetUserDataID(userData);
     }
 
-    public void SaveLocalProgress()
+    public void WriteLocalProgress()
     {
     }
 
-    public void LoadLocalProgress()
+    public void ReadLocalProgress()
     {
     }
     
-    public void LoadNetworkProgress()
+    public void WriteProgressToServer()
     {
+        progress.data = JsonUtility.ToJson(SaveManager.SaveHistory);
+        Debug.Log("ToServerProgress.data : " + progress.data);
+        SaveManager.SaveHistory = JsonUtility.FromJson<SaveHistory>(progress.data);
+        Debug.Log(SaveManager.SaveHistory);
+        NetworkDataManager.Instance.UploadProgress(progress);
     }
 
-    public void SaveNetworkProgress()
+    public void ReadProgressFromServer()
     {
+        NetworkDataManager.Instance.DownloadProgress();
     }
 
     private bool IsRegistered()
     {
         if (PlayerPrefs.HasKey("userReg"))
         {
-            userRegistered = PlayerPrefs.GetInt("userReg");
-            if (userRegistered == 1)
+            userLogged = PlayerPrefs.GetInt("userReg");
+            if (userLogged == 1)
             {
                 return true;
             }
@@ -104,14 +111,14 @@ public class DataManager : MonoBehaviour
         }
         else
         {
-            userRegistered = 0;
+            userLogged = 0;
             return false;
         }
     }
 
     private void SaveRegistered()
     {
-        PlayerPrefs.SetInt("userReg", userRegistered);
+        PlayerPrefs.SetInt("userReg", userLogged);
         PlayerPrefs.Save();
     }
 
