@@ -7,6 +7,10 @@ using NetworkSync;
 public class MainMenu : MonoBehaviour
 {
     public static MainMenu Instance;
+
+    public string gameSceneName;
+
+    public Transform menuPanel;
     public Transform gamePanel;
     public Transform loginPanel;
     public Transform userPanel;
@@ -59,6 +63,7 @@ public class MainMenu : MonoBehaviour
         SceneLoader.Instance.ScenePreloadDisable();
         loginPanel.gameObject.SetActive(true);
         userPanel.gameObject.SetActive(false);
+        menuPanel.gameObject.SetActive(false);  
     }
 
     public void ShowGamePanel()
@@ -66,12 +71,22 @@ public class MainMenu : MonoBehaviour
         SceneLoader.Instance.ScenePreloadDisable();
         loginPanel.gameObject.SetActive(false);
         userPanel.gameObject.SetActive(true);
+        menuPanel.gameObject.SetActive(true);
         gamePanel.gameObject.SetActive(true);
     }
 
     public void StartGame()
     {
-        SceneLoader.Instance.LoadingSceneAsync("GameScene");
+        SceneLoader.Instance.LoadingSceneAsync(gameSceneName);
     }
 
+    public void WriteProgressToServer()
+    {
+        DataManager.Instance.WriteProgressToServer();
+    }
+
+    public void ReadProgressFromServer()
+    {
+        DataManager.Instance.ReadProgressFromServer();
+    }
 }

@@ -125,6 +125,10 @@ namespace Fungus
             return debugInfo;
         }
 
+        public override string ToString()
+        {
+            return UnityEngine.JsonUtility.ToJson(this);
+        }
         #endregion
     }
 }
